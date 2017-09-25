@@ -6,6 +6,7 @@ const config = require('./config'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
+    authenticate = require('./app/routes/authenticate'),
     Routes = require('./app/routes/index'),
     helmet = require("helmet"),
     cors = require("cors"),
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('jwt-auth', process.env.JWT_AUTH);
 
 app.use(helmet());  
 app.use(cors({  
@@ -28,6 +30,7 @@ app.use(cors({
 }));
 app.use(compression());
 
+app.use('/authenticate', authenticate)
 app.use('/v1/api', Routes);
 
 app.use(function(req, res, next) {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird') 
-mongoose.connect(`mongodb://${process.env.DB_PORT}/${process.env.DB_NAME}`, { 
+mongoose.connect(`mongodb://${process.env.DB_IP}/${process.env.DB_NAME}`, { 
     useMongoClient: true, 
     promiseLibrary: require('bluebird') 
 });
