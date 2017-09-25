@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-const PostSchema = mongoose.Schema({
+
+const PostSchema = Schema({
     título: {
         type: String,
         required: true,
@@ -13,7 +15,13 @@ const PostSchema = mongoose.Schema({
     },
 }, {
     timestamps: true,
-    versionKey: false
+    versionKey: false,
+    toJSON: {
+        transform(doc, ret, options) {
+            ret.id = ret._id;
+            delete ret._id;
+        }
+    }
 });
 
 module.exports = mongoose.model('Post', PostSchema);

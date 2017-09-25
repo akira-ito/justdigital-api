@@ -28,6 +28,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "gulp-eslint": "^4.0.0",
     "gulp-istanbul": "^1.1.2",
     "gulp-livereload": "^3.8.1",
     "gulp-mocha": "3.0.1",

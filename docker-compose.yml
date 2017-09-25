@@ -11,5 +11,7 @@ services:
       DB_IP: mongo
   mongo:
     image: mongo
+    volumes:
+      - /data/mongodb/db:/data/db
     ports:
       - "27017:27017"

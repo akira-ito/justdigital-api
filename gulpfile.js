@@ -1,9 +1,10 @@
-var istanbul = require('gulp-istanbul');
 var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
 var notify = require('gulp-notify');
 var livereload = require('gulp-livereload');
 var mocha = require('gulp-mocha');
+var istanbul = require('gulp-istanbul');
+const eslint = require('gulp-eslint');
 
 
 
@@ -23,7 +24,7 @@ gulp.task('default', function() {
 
 
 gulp.task('test-watch', function() {
-    gulp.watch(['tests/**'], ['test']);
+    gulp.watch(['tests/**/*.js'], ['test']);
 });
 
 gulp.task('pre-test', function() {
@@ -32,7 +33,7 @@ gulp.task('pre-test', function() {
         .pipe(istanbul.hookRequire());
 });
 
-gulp.task('test', ['pre-test'], function() {
+gulp.task('test', ['lint', 'pre-test'], function() {
     return gulp.src(['tests/**/*.js'])
         .pipe(mocha())
         .pipe(istanbul.writeReports())
@@ -41,3 +42,12 @@ gulp.task('test', ['pre-test'], function() {
 
 // nyan
 // list
+
+
+
+gulp.task('lint', () => {
+    return gulp.src(['**/*.js', '!node_modules/**', '!coverage/**'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});

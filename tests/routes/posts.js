@@ -1,8 +1,8 @@
 const Test = require('../index'),
     Post = Test.models.Post;
 
-describe('Posts', () => {
-    beforeEach((done) => { //Before each test we empty the database
+describe('Routers: Posts', () => {
+    beforeEach((done) => { 
         Post.remove({}, (err) => {
             done();
         });

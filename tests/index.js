@@ -14,5 +14,6 @@ module.exports = {
     models: {
         Post: require('../app/models/Post')
     },
-    chai: chai
+    chai: chai,
+    should: should
 }
